@@ -1,0 +1,10 @@
+id;username;telp;deposit;winrate;status
+1;irfano alok;088890901234;2500000;10;active
+2;zahid ganteng;089000001111;350000;15;active
+3;yanto supreme;088867674125;890120;7;deactive
+4;budi baik;087729084567;1000000;21;actice
+5;user 1;085521374587;210000;99;active
+6;Andi mania;082255864532;0;4;active
+7;user 2;086521304522;0;5;active
+8;user64;086464646464;0;2;active
+9;pemain22;085534219090;0;13;active
