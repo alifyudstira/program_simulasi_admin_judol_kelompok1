@@ -5,14 +5,7 @@
 
 using namespace std;
 
-//materi yang perlu ditambahin
-//1. file (x)
-//2. struct (x)
-//3. rekursif
-//4. sort
-//5. search
-//6. pointer
-
+// STRUCT
 struct korban
 {
     string id;
@@ -23,6 +16,7 @@ struct korban
     string status;
 };
 
+// SORTING
 void tukar(string &a, string &b) {
     string t = a; a = b; b = t;
 }
@@ -40,16 +34,17 @@ int partition(string arrId[], string arrDeposit[], korban arrKorban[], int low, 
             i++;
             tukar(arrId[i], arrId[j]);
             tukar(arrDeposit[i], arrDeposit[j]);
-            tukarKorban(arrKorban[i], arrKorban[j]);  // ikut swap
+            tukarKorban(arrKorban[i], arrKorban[j]);
         }
     }
 
     tukar(arrId[i + 1], arrId[high]);
     tukar(arrDeposit[i + 1], arrDeposit[high]);
-    tukarKorban(arrKorban[i + 1], arrKorban[high]);  // ikut swap
+    tukarKorban(arrKorban[i + 1], arrKorban[high]);
     return (i + 1);
 }
 
+// quick sort
 void quick_sort(string arrId[], string arrDeposit[], korban arrKorban[], int low, int high) {
     if (low < high) {
         int pi = partition(arrId, arrDeposit, arrKorban, low, high);
@@ -58,6 +53,7 @@ void quick_sort(string arrId[], string arrDeposit[], korban arrKorban[], int low
     }
 }
 
+// pemasukkan data ke array
 void sortKorban()
 {
     string id, deposit;
@@ -80,11 +76,11 @@ void sortKorban()
         getline(file, k.telp, ';');
         getline(file, k.deposit, ';');
         getline(file, k.winrate, ';');
-        getline(file, k.status, '\n');  // terakhir pakai '\n'
+        getline(file, k.status, '\n');
 
         arrId[i] = k.id;
         arrDeposit[i] = k.deposit;
-        arrKorban[i] = k;  // <-- simpan full data
+        arrKorban[i] = k;
         i++;
     }
     file.close();
@@ -92,7 +88,6 @@ void sortKorban()
     int actualSize = i;
 
     quick_sort(arrId, arrDeposit, arrKorban, 0, actualSize - 1);
-    //         ^^^^^^^^ pass arrKorban juga ke quick_sort
 
     // Tampilkan hasil
     for (int j = 0; j < actualSize; j++) {
@@ -110,6 +105,7 @@ void sortKorban()
     file.close();
 }
 
+// SEARCH
 void cariKorban()
 {
     ifstream file("data.txt");
@@ -166,6 +162,8 @@ void cariKorban()
     
 }
 
+// ADD DATA
+// mendapatkan id baru
 int getNewId() {
     ifstream file("data.txt");
     string line, lastLine;
@@ -183,10 +181,8 @@ int getNewId() {
         return 1;
     }
 
-    // Mencari posisi tanda ';' pertama
     size_t pos = lastLine.find(';');
     if (pos != string::npos) {
-        // Mengambil substring dari awal sampai sebelum ';'
         string strId = lastLine.substr(0, pos);
         return stoi(strId) + 1;
     }
@@ -223,6 +219,7 @@ void addKorban() {
     }
 }
 
+// TAMPILKAN DATA
 void showKorban()
 {
     ifstream file("data.txt");
@@ -260,6 +257,7 @@ void showKorban()
     }
 }
 
+// EDIT DATA
 void ubahStatus() {
     ifstream readFile("data.txt");
     ofstream writeFile("temp.txt", ios::trunc);
@@ -281,7 +279,7 @@ void ubahStatus() {
         writeFile << line << endl;
     }
 
-    // 2. Proses Salin Data ke Temp
+    // Proses Salin Data ke Temp
     while (getline(readFile, id, ';')) {
         getline(readFile, username, ';');
         getline(readFile, telp, ';');
@@ -289,6 +287,7 @@ void ubahStatus() {
         getline(readFile, winrate, ';');
         getline(readFile, status);
 
+        // input data baru
         if (id == idCari) {
             ditemukan = true;
             string newWin, pil;
@@ -308,6 +307,7 @@ void ubahStatus() {
     readFile.close();
     writeFile.close();
 
+    // menyalin data baru dari temp.txt ke data.txt
     if (ditemukan) {
         ifstream readTemp("temp.txt");
         ofstream writeData("data.txt", ios::trunc);
@@ -324,6 +324,7 @@ void ubahStatus() {
     }
 }
 
+// TAMPILAN MENU
 void menu()
 {
     int pilihan;
@@ -337,8 +338,7 @@ void menu()
         cout<<"3. Ubah Status Korban"<<endl;
         cout<<"4. Cari Korban"<<endl;
         cout<<"5. Sort Korban"<<endl;
-        cout<<"6. Total deposit"<<endl;
-        cout<<"7. Exit"<<endl;
+        cout<<"6. Exit"<<endl;
         cout<<"====================="<<endl;
         cout<<"Pilihan: ";cin>>pilihan;
 
@@ -379,6 +379,7 @@ void menu()
     
 }
 
+// TAMPILAN AWAL
 void tampilanAwal()
 {
     cout<<"========================================"<<endl;
@@ -389,6 +390,7 @@ void tampilanAwal()
     cin.get();
 }
 
+// MAIN
 int main(int argc, char const *argv[])
 {
     tampilanAwal();
